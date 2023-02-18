@@ -1,0 +1,35 @@
+<h2>Expedir certificado</h2>
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+  <div>
+    <label for="password">
+      Contraseña:
+    </label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+  <div>
+    <label for="studentName">
+      Nombre completo:
+    </label>
+    <input id="studentName" type="text" formControlName="studentName">
+  </div>
+  <div>
+    <label for="courseName">
+      Curso:
+    </label>
+    <input id="courseName" type="text" formControlName="courseName">
+  </div>
+  <div>
+      <label for="teacherCode">
+        Firma docente:
+      </label>
+      <input id="teacherCode" type="text" formControlName="teacherCode">
+  </div>
+  <div>
+      <label for="hours">
+        Horas:
+      </label>
+      <input id="hours" type="text" formControlName="hours">
+  </div>
+  <button class="button" type="submit">Generar</button>
+</form>
+<a href="{{url}}" target="_blank">{{url}}</a>
