@@ -1,0 +1,44 @@
+<h2>Subir Firmas</h2>
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit(uploadForm.value)">
+  <div>
+    <label for="password">
+      Contraseña:
+    </label>
+    <input id="password" type="password" formControlName="password">
+  </div>
+  <div>
+    <label for="configCode">
+      Identificador firma:
+    </label>
+    <input id="configCode" type="text" formControlName="configCode">
+  </div>
+  <div>
+    <label for="configName">
+      Nombre:
+    </label>
+    <input id="configName" type="text" formControlName="configName">
+  </div>
+  <div>
+    <label for="configName">
+      Tipo:
+    </label>
+    <select id="configType" name="select" formControlName="configType">
+      <option value="0">Logo</option>
+      <option value="1">Firma</option>
+      <option value="2">Otros</option>
+    </select>
+  </div>
+  <div>
+    <input id="file"  type="file" class="file-input"
+      (change)="onFileSelected($event)" #fileUpload>
+    <div class="file-upload">
+      {{file?.name || "No ha seleccionado un archivo"}}
+      <button mat-mini-fab color="primary" class="upload-btn"
+        (click)="fileUpload.click()">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="attachment"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <button class="button" type="submit">Subir</button>
+</form>
+<p>{{result}}</p>

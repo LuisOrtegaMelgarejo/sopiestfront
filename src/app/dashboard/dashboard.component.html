@@ -1,0 +1,51 @@
+<h2>Reporte por años</h2>
+
+<ul class="heroes">
+  <li *ngFor="let rep of reporte">
+    <a (click)="selectAnno(rep.anno)">
+      {{rep.anno}}
+    </a>
+  </li>
+</ul>
+
+<div *ngIf="yearSelected">
+  <h2>Detalle por meses {{ yearSelected.anno }}</h2>
+  
+  <ul class="heroes">
+    <li *ngFor="let reporte of yearSelected.detalle">
+      <a (click)="selectMes(reporte.mes)">
+        {{reporte.mes}} - {{reporte.detalle.length}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="monthSelected">
+  <h2>Detalle de {{ monthSelected.mes }}</h2>
+  <table>
+    <thead>
+      <th>Alumno</th>
+      <th>Curso</th>
+      <th>Url</th>
+      <th>Eliminar</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let certificate of monthSelected.detalle">
+        <td>
+          {{certificate.studentName}}
+        </td>
+        <td>
+          {{certificate.courseName}}
+        </td>
+        <td>
+          <a target="_blank" href="{{certificate.url}}">{{certificate.url}}</a>
+        </td>
+        <td>
+          <a (click)="eliminar(certificate.id)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
