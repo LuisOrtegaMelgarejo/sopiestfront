@@ -1,20 +1,50 @@
 <h2>Expedir certificado</h2>
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-  <div>
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" fxLayout="column">
+  <div fxFlex>
     <label for="password">
       Contraseña:
     </label>
-    <input id="password" type="password" formControlName="password">
+    <input id="password" type="password" formControlName="password" autocompleteOff>
   </div>
-  <div>
-    <label for="logoCode">
-      Logo:
-    </label>
-    <select id="logoCode" name="select" formControlName="logoCode">
-      <option [value]="logo.configCode" *ngFor="let logo of logos">{{logo.configName}}</option>
-    </select>
-</div>
-  <div>
+  <div fxLayout="row">
+    <div fxFlex style="padding-right: 0.5rem;">
+      <label for="customId">
+        Desea especificar un ID? * Si coloca un valor preexistente, lo reemplazará *
+      </label>
+      <input id="customId" type="text" formControlName="customId" autocompleteOff>
+    </div>
+    <div fxFlex  style="padding-left: 0.5rem;">
+      <label for="logoCode">
+        Fecha:
+      </label>
+      <div style="display: block;">
+        <mat-form-field style="width: 100%;">
+          <input formControlName="date" matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div fxFlex  style="padding-right: 0.5rem;">
+      <label for="logoCode">
+        Logo:
+      </label>
+      <select id="logoCode" name="select" formControlName="logoCode">
+        <option [value]="logo.configCode" *ngFor="let logo of logos">{{logo.configName}}</option>
+      </select>
+    </div>
+    <div fxFlex  style="padding-left: 0.5rem;">
+      <label for="teacherCode">
+        Firma docente:
+      </label>
+      <select id="teacherCode" name="select" formControlName="teacherCode">
+        <option [value]="firma.configCode" *ngFor="let firma of firmas">{{firma.configName}}</option>
+      </select>
+    </div>
+  </div>
+  <div fxFlex>
     <label for="studentName">
       Nombre completo:
     </label>
@@ -26,26 +56,15 @@
     </label>
     <input id="courseName" type="text" formControlName="courseName">
   </div>
-  <div>
-      <label for="teacherCode">
-        Firma docente:
-      </label>
-      <select id="teacherCode" name="select" formControlName="teacherCode">
-        <option [value]="firma.configCode" *ngFor="let firma of firmas">{{firma.configName}}</option>
-      </select>
-  </div>
-  <div>
+  <div fxFlex>
       <label for="hours">
         Horas:
       </label>
       <input id="hours" type="text" formControlName="hours">
   </div>
-  <div>
-    <label for="customId">
-      Desea especificar un ID? * Si coloca un valor que ya existe, lo reemplazará *
-    </label>
-    <input id="customId" type="text" formControlName="customId">
-</div>
-  <button class="button" type="submit">Generar</button>
+  <div fxFlex fxLayoutAlign="center center">
+    <button class="button" type="submit">Generar</button>
+  </div>
 </form>
+
 <a href="{{url}}" target="_blank">{{url}}</a>

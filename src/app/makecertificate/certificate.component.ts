@@ -21,6 +21,7 @@ export class CertificateComponent implements OnInit {
     this.checkoutForm = this.formBuilder.group({
       logoCode: '',
       studentName: '',
+      date: new Date(),
       courseName: '',
       teacherCode: '',
       password: '',
