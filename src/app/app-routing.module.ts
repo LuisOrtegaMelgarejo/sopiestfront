@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CertificateComponent } from './makecertificate/certificate.component';
+import { LoginComponent } from './login/login.component';
 import { SignComponent } from './uploadsign/sign.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'make-certificate', component: CertificateComponent },
-  { path: 'upload-sign', component: SignComponent }
+  { path: 'upload-sign', component: SignComponent },
 ];
 
 @NgModule({

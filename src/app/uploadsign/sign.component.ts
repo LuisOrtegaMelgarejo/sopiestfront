@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { CertificateService } from '../certificate.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-sign',
@@ -15,7 +16,7 @@ export class SignComponent implements OnInit {
   formData: FormData | undefined;
   @ViewChild('fileUpload') fileUpload: ElementRef;
 
-  constructor(private certificateService: CertificateService, private formBuilder: FormBuilder) { 
+  constructor(private certificateService: CertificateService, private formBuilder: FormBuilder, private loginService: LoginService) { 
     this.uploadForm = this.formBuilder.group({
       password: '',
       configCode: '',
@@ -26,6 +27,9 @@ export class SignComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(!this.loginService.isAlreadyLogin()) {
+      this.loginService.sendToRoute('login');
+    };
   }
   
   onFileSelected(event: any) {

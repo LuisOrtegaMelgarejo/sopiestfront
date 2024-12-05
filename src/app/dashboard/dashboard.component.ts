@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Detalle, ReporteCertificado } from '../certificate';
 import { CertificateService } from '../certificate.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,9 +13,13 @@ export class DashboardComponent implements OnInit {
   yearSelected: ReporteCertificado | null = null;
   monthSelected: Detalle | null = null;
 
-  constructor(private certificateService: CertificateService) { }
+  constructor(private certificateService: CertificateService, private loginService: LoginService) { }
 
   ngOnInit(): void {
+    console.log('DashboardComponent.ngOnInit');
+    if(!this.loginService.isAlreadyLogin()) {
+      this.loginService.sendToRoute('login');
+    };
     this.getReport();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ReporteCertificado } from '../certificate';
 import { CertificateService } from '../certificate.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-certificate',
@@ -16,7 +17,7 @@ export class CertificateComponent implements OnInit {
   checkoutForm;
   url: string;
 
-  constructor(private certificateService: CertificateService, private formBuilder: FormBuilder) { 
+  constructor(private certificateService: CertificateService, private formBuilder: FormBuilder, private loginService: LoginService) { 
     this.url = ''
     this.checkoutForm = this.formBuilder.group({
       logoCode: '',
@@ -28,9 +29,13 @@ export class CertificateComponent implements OnInit {
       hours: 0,
       customId: null,
     });
+    
   }
 
   ngOnInit(): void {
+    if(!this.loginService.isAlreadyLogin()) {
+      this.loginService.sendToRoute('login');
+    };
     this.certificateService.getConfig(0).subscribe(response => {
       this.logos = response;
     })
