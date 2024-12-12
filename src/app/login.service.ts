@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private cookieService: CookieService, private router: Router) { }
 
   login(loginData: any): void {
-    if (loginData.username === 'admin' && loginData.password === 'admin') {
+    if (loginData.username === 'admin' && loginData.password === 'cursos2023') {
       this.cookieService.set('Authorization', this.generateToken());
       this.router.navigate(['/dashboard']);
     }
@@ -24,19 +24,15 @@ export class LoginService {
 
   isAlreadyLogin(): boolean {
     const data = this.cookieService.get('Authorization');
-    console.log('getting '+data);
     try {
       var bytes  = CryptoJS.AES.decrypt(data, this.secretKey);
       var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      console.log(decryptedData);
       if (!decryptedData || decryptedData.expiresIn > new Date().getTime()) {
-        console.log('valid');
         return true;
       }
     } catch (error) {
       console.log(error);
     }
-    console.log('invalid');
     return false;
   }
 
